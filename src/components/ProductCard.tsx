@@ -45,13 +45,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) 
                 <ShoppingCart className="size-4" />
               </Button>
               <Button 
-                onClick={(e) => e.stopPropagation()}
+                as="div"
                 size="icon"
                 variant="secondary"
                 className="rounded-full size-10 shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out delay-75"
                 aria-label="Quick view"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
               >
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/product/${product.id}`} onClick={(e) => e.stopPropagation()}>
                   <Eye className="size-4" />
                 </Link>
               </Button>
