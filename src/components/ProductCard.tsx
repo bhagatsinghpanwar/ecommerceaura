@@ -45,7 +45,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) 
                 <ShoppingCart className="size-4" />
               </Button>
               <Button 
-                as="div"
                 size="icon"
                 variant="secondary"
                 className="rounded-full size-10 shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out delay-75"

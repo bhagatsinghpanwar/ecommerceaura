@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ARViewer from "@/components/ARViewer";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,6 +15,7 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [showARViewer, setShowARViewer] = useState(false);
   
   // Find product by id
   const product = products.find(p => p.id === id);
@@ -44,6 +46,10 @@ const ProductDetail = () => {
       setQuantity(newQuantity);
     }
   };
+
+  const toggleARViewer = () => {
+    setShowARViewer(!showARViewer);
+  };
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -62,16 +68,24 @@ const ProductDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Images */}
             <div className="space-y-4">
-              <div className="aspect-square rounded-xl overflow-hidden bg-muted/30">
-                <img 
-                  src={product.images[selectedImage]} 
-                  alt={product.name} 
-                  className="w-full h-full object-cover"
+              {showARViewer ? (
+                <ARViewer 
+                  productName={product.name}
+                  arModelUrl={product.arModel}
+                  className="aspect-square rounded-xl overflow-hidden bg-muted/30"
                 />
-              </div>
+              ) : (
+                <div className="aspect-square rounded-xl overflow-hidden bg-muted/30">
+                  <img 
+                    src={product.images[selectedImage]} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
               
               {/* Image Thumbnails */}
-              {product.images.length > 1 && (
+              {!showARViewer && product.images.length > 1 && (
                 <div className="flex gap-4 overflow-auto pb-2">
                   {product.images.map((image, index) => (
                     <button
@@ -94,8 +108,12 @@ const ProductDetail = () => {
               {/* AR Viewer Button */}
               {product.arModel && (
                 <div className="pt-2">
-                  <Button variant="outline" className="w-full">
-                    View in AR
+                  <Button 
+                    variant={showARViewer ? "default" : "outline"} 
+                    className="w-full"
+                    onClick={toggleARViewer}
+                  >
+                    {showARViewer ? "View Photos" : "View in AR"}
                   </Button>
                 </div>
               )}
