@@ -64,15 +64,6 @@ const Navbar = () => {
             Shop
           </Link>
           <Link 
-            to="/categories" 
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              location.pathname.includes('/categories') ? "text-primary" : "text-foreground"
-            )}
-          >
-            Categories
-          </Link>
-          <Link 
             to="/about" 
             className={cn(
               "text-sm font-medium transition-colors hover:text-primary",
@@ -157,12 +148,6 @@ const Navbar = () => {
             className="text-2xl font-medium hover:text-primary transition-colors"
           >
             Shop
-          </Link>
-          <Link 
-            to="/categories" 
-            className="text-2xl font-medium hover:text-primary transition-colors"
-          >
-            Categories
           </Link>
           <Link 
             to="/about" 

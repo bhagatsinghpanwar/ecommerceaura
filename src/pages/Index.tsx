@@ -4,8 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FeaturedProducts from "@/components/FeaturedProducts";
-import CategorySection from "@/components/CategorySection";
-import { products, categories } from "@/lib/data";
+import { products } from "@/lib/data";
 import { ArrowRight, ShieldCheck, Truck, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -84,9 +83,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
-      {/* Categories */}
-      <CategorySection categories={categories} />
       
       {/* Benefits Section */}
       <section className="py-20 px-6">
