@@ -154,7 +154,7 @@ const ARViewer: React.FC<ARViewerProps> = ({
           
           <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 50 }}>
             <Suspense fallback={null}>
-              <Stage environment="city" intensity={0.6} contactShadow={false}>
+              <Stage environment="city" intensity={0.6}>
                 <PresentationControls
                   global
                   rotation={[0, isRotating ? Math.sin(Date.now() * 0.001) * 0.2 : 0, 0]}
