@@ -1,4 +1,3 @@
-
 export type Product = {
   id: string;
   name: string;
@@ -246,7 +245,6 @@ export const categories: Category[] = [
   }
 ];
 
-// Shopping cart state
 export type CartItem = {
   productId: string;
   quantity: number;
@@ -254,7 +252,6 @@ export type CartItem = {
   size?: string;
 };
 
-// User type
 export type User = {
   id: string;
   name: string;

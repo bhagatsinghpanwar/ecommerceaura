@@ -1,14 +1,52 @@
 
-import React, { useState } from "react";
-import { CameraOff, Camera, Smartphone } from "lucide-react";
+import React, { useState, useRef, Suspense } from "react";
+import { CameraOff, Camera, Smartphone, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, PresentationControls, useGLTF, Environment, Stage } from "@react-three/drei";
 
 interface ARViewerProps {
   productName: string;
   arModelUrl?: string;
   className?: string;
 }
+
+// Placeholder 3D model component
+const Model = ({ url }: { url: string }) => {
+  const { scene } = useGLTF(url);
+  return <primitive object={scene} scale={1.5} />;
+};
+
+// Fallback model based on product type
+const FallbackModel = ({ productType }: { productType: string }) => {
+  let modelUrl = "";
+  
+  switch (productType.toLowerCase()) {
+    case "lighting":
+      modelUrl = "/models/lamp.glb";
+      break;
+    case "furniture":
+      modelUrl = "/models/chair.glb";
+      break;
+    case "kitchenware":
+      modelUrl = "/models/coffee.glb";
+      break;
+    case "electronics":
+      modelUrl = "/models/headphones.glb";
+      break;
+    case "home decor":
+      modelUrl = "/models/clock.glb";
+      break;
+    case "smart home":
+      modelUrl = "/models/plantpot.glb";
+      break;
+    default:
+      modelUrl = "/models/placeholder.glb";
+  }
+  
+  return <Model url={modelUrl} />;
+};
 
 const ARViewer: React.FC<ARViewerProps> = ({ 
   productName, 
@@ -17,6 +55,8 @@ const ARViewer: React.FC<ARViewerProps> = ({
 }) => {
   const [isARMode, setIsARMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRotating, setIsRotating] = useState(true);
+  const [productType, setProductType] = useState("furniture");
   
   const startARExperience = () => {
     setIsLoading(true);
@@ -29,6 +69,10 @@ const ARViewer: React.FC<ARViewerProps> = ({
   
   const exitARMode = () => {
     setIsARMode(false);
+  };
+
+  const toggleRotation = () => {
+    setIsRotating(!isRotating);
   };
 
   if (!arModelUrl) {
@@ -85,33 +129,69 @@ const ARViewer: React.FC<ARViewerProps> = ({
           </div>
         </div>
       ) : (
-        <div className="aspect-video relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-          {/* This would be replaced with actual AR implementation */}
-          <div className="text-center p-6 max-w-md">
-            <div className="mb-4 animate-float">
-              <img 
-                src="https://images.unsplash.com/photo-1586024486164-ce9b3d87e09f?q=80&w=2576&auto=format&fit=crop"
-                alt="AR simulation"
-                className="max-h-48 mx-auto rounded-lg"
-              />
-            </div>
-            <h3 className="text-white text-lg font-medium mb-2">AR Mode</h3>
-            <p className="text-white/70 mb-4">
-              This is a placeholder for the AR experience. In a real implementation, 
-              you would see the product in your actual environment.
-            </p>
+        <div className="aspect-video relative bg-gradient-to-br from-gray-800 to-gray-900">
+          {/* 3D model viewer */}
+          <div className="absolute top-4 right-4 z-10 flex gap-2">
             <Button 
               variant="outline" 
+              size="icon"
+              onClick={toggleRotation}
+              className="text-white border-white/30 hover:bg-white/10 rounded-full"
+              title={isRotating ? "Stop rotation" : "Start rotation"}
+            >
+              <RotateCw className={cn("h-4 w-4", isRotating && "animate-spin")} />
+            </Button>
+            
+            <Button 
+              variant="outline" 
+              size="sm"
               onClick={exitARMode}
               className="text-white border-white/30 hover:bg-white/10"
             >
-              Exit AR Mode
+              Exit
             </Button>
+          </div>
+          
+          <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 50 }}>
+            <Suspense fallback={null}>
+              <Stage environment="city" intensity={0.6} contactShadow={false}>
+                <PresentationControls
+                  global
+                  rotation={[0, isRotating ? Math.sin(Date.now() * 0.001) * 0.2 : 0, 0]}
+                  polar={[-0.1, 0.1]}
+                  azimuth={[-1, 1]}
+                  config={{ mass: 2, tension: 400 }}
+                  snap={{ mass: 4, tension: 400 }}
+                >
+                  {arModelUrl ? (
+                    <Model url={arModelUrl} />
+                  ) : (
+                    <FallbackModel productType={productType} />
+                  )}
+                </PresentationControls>
+              </Stage>
+              <Environment preset="city" />
+            </Suspense>
+            <OrbitControls makeDefault autoRotate={isRotating} autoRotateSpeed={1} />
+          </Canvas>
+          
+          <div className="absolute bottom-4 left-4 right-4 text-center">
+            <p className="text-white/70 text-sm">
+              Click and drag to rotate • Scroll to zoom
+            </p>
           </div>
         </div>
       )}
     </div>
   );
 };
+
+// Preload models to avoid load times during interaction
+useGLTF.preload("/models/lamp.glb");
+useGLTF.preload("/models/chair.glb");
+useGLTF.preload("/models/coffee.glb");
+useGLTF.preload("/models/headphones.glb");
+useGLTF.preload("/models/clock.glb");
+useGLTF.preload("/models/plantpot.glb");
 
 export default ARViewer;

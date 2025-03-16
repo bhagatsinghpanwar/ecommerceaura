@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { products } from "@/lib/data";
@@ -17,10 +16,8 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [showARViewer, setShowARViewer] = useState(false);
   
-  // Find product by id
   const product = products.find(p => p.id === id);
   
-  // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -57,7 +54,6 @@ const ProductDetail = () => {
       
       <main className="flex-grow py-10 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Breadcrumb */}
           <div className="mb-8">
             <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center">
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -66,7 +62,6 @@ const ProductDetail = () => {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Product Images */}
             <div className="space-y-4">
               {showARViewer ? (
                 <ARViewer 
@@ -84,7 +79,6 @@ const ProductDetail = () => {
                 </div>
               )}
               
-              {/* Image Thumbnails */}
               {!showARViewer && product.images.length > 1 && (
                 <div className="flex gap-4 overflow-auto pb-2">
                   {product.images.map((image, index) => (
@@ -105,21 +99,17 @@ const ProductDetail = () => {
                 </div>
               )}
               
-              {/* AR Viewer Button */}
-              {product.arModel && (
-                <div className="pt-2">
-                  <Button 
-                    variant={showARViewer ? "default" : "outline"} 
-                    className="w-full"
-                    onClick={toggleARViewer}
-                  >
-                    {showARViewer ? "View Photos" : "View in AR"}
-                  </Button>
-                </div>
-              )}
+              <div className="pt-2">
+                <Button 
+                  variant={showARViewer ? "default" : "outline"} 
+                  className="w-full"
+                  onClick={toggleARViewer}
+                >
+                  {showARViewer ? "View Photos" : product.arModel ? "View in 3D" : "View Photos"}
+                </Button>
+              </div>
             </div>
             
-            {/* Product Info */}
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-medium mb-2">{product.name}</h1>
@@ -128,7 +118,6 @@ const ProductDetail = () => {
                   <div className="text-sm text-muted-foreground">{product.stock > 0 ? "In Stock" : "Out of Stock"}</div>
                 </div>
                 
-                {/* Ratings */}
                 <div className="flex items-center gap-2 mb-6">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
@@ -144,7 +133,6 @@ const ProductDetail = () => {
                 <p className="text-muted-foreground">{product.description}</p>
               </div>
               
-              {/* Colors */}
               {product.colors && product.colors.length > 0 && (
                 <div>
                   <h3 className="text-sm font-medium mb-3">Color</h3>
@@ -165,7 +153,6 @@ const ProductDetail = () => {
                 </div>
               )}
               
-              {/* Sizes */}
               {product.sizes && product.sizes.length > 0 && (
                 <div>
                   <h3 className="text-sm font-medium mb-3">Size</h3>
@@ -187,7 +174,6 @@ const ProductDetail = () => {
                 </div>
               )}
               
-              {/* Quantity */}
               <div>
                 <h3 className="text-sm font-medium mb-3">Quantity</h3>
                 <div className="flex items-center border border-input rounded-md w-32">
@@ -209,7 +195,6 @@ const ProductDetail = () => {
                 </div>
               </div>
               
-              {/* Action Buttons */}
               <div className="flex gap-4 pt-4">
                 <Button 
                   onClick={handleAddToCart} 
@@ -229,7 +214,6 @@ const ProductDetail = () => {
                 </Button>
               </div>
               
-              {/* Features */}
               {product.features && product.features.length > 0 && (
                 <div className="pt-8 border-t">
                   <h3 className="text-lg font-medium mb-4">Features</h3>
