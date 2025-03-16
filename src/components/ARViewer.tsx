@@ -193,5 +193,12 @@ useGLTF.preload("/models/coffee.glb");
 useGLTF.preload("/models/headphones.glb");
 useGLTF.preload("/models/clock.glb");
 useGLTF.preload("/models/plantpot.glb");
+// Preload new models
+useGLTF.preload("/models/bookshelf.glb");
+useGLTF.preload("/models/floorlamp.glb");
+useGLTF.preload("/models/coffeetable.glb");
+useGLTF.preload("/models/kitchenscale.glb");
+useGLTF.preload("/models/deskpad.glb");
+useGLTF.preload("/models/pendant.glb");
 
 export default ARViewer;

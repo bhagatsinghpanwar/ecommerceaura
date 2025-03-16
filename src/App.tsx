@@ -11,6 +11,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Categories from "./pages/Categories";
+import AdminLayout from "./components/AdminLayout";
+import ModelManagement from "./pages/admin/ModelManagement";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,12 @@ const App = () => (
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/categories" element={<Categories />} />
+            
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="models" element={<ModelManagement />} />
+            </Route>
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

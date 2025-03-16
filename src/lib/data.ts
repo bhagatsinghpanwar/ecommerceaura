@@ -1,3 +1,4 @@
+
 export type Product = {
   id: string;
   name: string;
@@ -31,7 +32,7 @@ export const products: Product[] = [
     price: 129.99,
     images: [
       "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=2668&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513506003901-e6a229e2d15?q=80&w=2670&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=2574&auto=format&fit=crop"
     ],
     category: "lighting",
@@ -197,6 +198,180 @@ export const products: Product[] = [
     rating: 4.4,
     reviewCount: 63,
     stock: 29
+  },
+  {
+    id: "7",
+    name: "Modern Geometric Bookshelf",
+    description: "Contemporary bookshelf with unique geometric design and versatile storage options.",
+    price: 349.99,
+    images: [
+      "https://images.unsplash.com/photo-1528297506728-9533d2ac3fa4?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1594620302200-9a762244a156?q=80&w=2619&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1607666046210-db52bc2080f0?q=80&w=2670&auto=format&fit=crop"
+    ],
+    category: "furniture",
+    tags: ["bookshelf", "storage", "modern", "geometric"],
+    features: [
+      "Unique geometric design",
+      "Solid hardwood construction",
+      "Multiple storage compartments",
+      "Easy assembly",
+      "Anti-tip safety features"
+    ],
+    colors: [
+      { name: "Walnut", hex: "#5C4033" },
+      { name: "White Oak", hex: "#E8DCC2" },
+      { name: "Matte Black", hex: "#2A2A2A" }
+    ],
+    arModel: "/models/bookshelf.glb",
+    rating: 4.5,
+    reviewCount: 86,
+    stock: 32
+  },
+  {
+    id: "8",
+    name: "Smart LED Floor Lamp",
+    description: "Voice-controlled smart floor lamp with customizable lighting scenes and app integration.",
+    price: 199.99,
+    images: [
+      "https://images.unsplash.com/photo-1567177662154-dfeb4c93b6ae?q=80&w=2680&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1634643836960-c345b3c3e998?q=80&w=2574&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1581341300960-a5449ea7445b?q=80&w=2574&auto=format&fit=crop"
+    ],
+    category: "lighting",
+    tags: ["lamp", "smart", "LED", "floor lamp"],
+    features: [
+      "Voice control compatibility",
+      "Smartphone app integration",
+      "Customizable lighting scenes",
+      "Energy-efficient LEDs",
+      "16 million color options"
+    ],
+    colors: [
+      { name: "Brushed Nickel", hex: "#C0C0C0" },
+      { name: "Matte Black", hex: "#2A2A2A" },
+      { name: "Brass", hex: "#D4AF37" }
+    ],
+    arModel: "/models/floorlamp.glb",
+    rating: 4.7,
+    reviewCount: 132,
+    stock: 45
+  },
+  {
+    id: "9",
+    name: "Designer Coffee Table",
+    description: "Sculptural coffee table with tempered glass top and handcrafted wooden base.",
+    price: 459.99,
+    images: [
+      "https://images.unsplash.com/photo-1565191999001-551c187427bb?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1532372320572-cda25653a694?q=80&w=2668&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1611967164521-abae8fba4668?q=80&w=2670&auto=format&fit=crop"
+    ],
+    category: "furniture",
+    tags: ["coffee table", "designer", "living room", "glass"],
+    features: [
+      "Tempered glass top",
+      "Handcrafted wooden base",
+      "Sculptural design",
+      "Felt-padded feet",
+      "Easy assembly"
+    ],
+    colors: [
+      { name: "Natural Oak", hex: "#DAB76A" },
+      { name: "Walnut", hex: "#5C4033" },
+      { name: "Ebony", hex: "#3D2B1F" }
+    ],
+    arModel: "/models/coffeetable.glb",
+    rating: 4.8,
+    reviewCount: 74,
+    stock: 18
+  },
+  {
+    id: "10",
+    name: "Smart Kitchen Scale",
+    description: "Precision digital kitchen scale with nutritional tracking and app connectivity.",
+    price: 69.99,
+    images: [
+      "https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?q=80&w=2672&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=2520&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1591243315780-978fd00ff9db?q=80&w=2670&auto=format&fit=crop"
+    ],
+    category: "kitchenware",
+    tags: ["kitchen", "scale", "smart", "cooking"],
+    features: [
+      "0.1g precision measurement",
+      "Nutritional tracking",
+      "Smartphone app connectivity",
+      "Recipe scaling",
+      "Multiple unit conversions"
+    ],
+    colors: [
+      { name: "Brushed Steel", hex: "#C0C0C0" },
+      { name: "Matte Black", hex: "#2A2A2A" },
+      { name: "White", hex: "#FFFFFF" }
+    ],
+    arModel: "/models/kitchenscale.glb",
+    rating: 4.6,
+    reviewCount: 95,
+    stock: 63
+  },
+  {
+    id: "11",
+    name: "Wireless Charging Desk Pad",
+    description: "Premium desk pad with integrated wireless charging for multiple devices.",
+    price: 89.99,
+    images: [
+      "https://images.unsplash.com/photo-1611174797373-a3a5461ab039?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1619430041588-7417ab30cfd1?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1618420281222-d1388d70914a?q=80&w=2574&auto=format&fit=crop"
+    ],
+    category: "electronics",
+    tags: ["desk", "charging", "wireless", "office"],
+    features: [
+      "Multiple wireless charging zones",
+      "Water-resistant surface",
+      "Non-slip base",
+      "Cable management system",
+      "Compatible with all Qi-enabled devices"
+    ],
+    colors: [
+      { name: "Oxford Gray", hex: "#4D5D6C" },
+      { name: "Saddle Brown", hex: "#954535" },
+      { name: "Black", hex: "#000000" }
+    ],
+    arModel: "/models/deskpad.glb",
+    rating: 4.5,
+    reviewCount: 117,
+    stock: 52
+  },
+  {
+    id: "12",
+    name: "Modern Pendant Light",
+    description: "Minimalist pendant light with adjustable height and warm, dimmable lighting.",
+    price: 149.99,
+    images: [
+      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=2574&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1540638349517-3abd5afc5847?q=80&w=2574&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513506003901-e6a229e2d15?q=80&w=2670&auto=format&fit=crop"
+    ],
+    category: "lighting",
+    tags: ["pendant", "ceiling", "light", "modern"],
+    features: [
+      "Dimmable LED bulb included",
+      "Adjustable hanging height",
+      "Cast aluminum shade",
+      "Easy installation",
+      "Energy efficient"
+    ],
+    colors: [
+      { name: "Matte Black", hex: "#2A2A2A" },
+      { name: "Brass", hex: "#D4AF37" },
+      { name: "Copper", hex: "#B87333" }
+    ],
+    arModel: "/models/pendant.glb",
+    rating: 4.7,
+    reviewCount: 93,
+    stock: 36
   }
 ];
 
