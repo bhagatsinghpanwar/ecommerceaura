@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { 
@@ -21,12 +20,11 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Trash2, Upload, Cube, Eye, Link as LinkIcon } from "lucide-react";
+import { Trash2, Upload, Box, Eye, Link as LinkIcon } from "lucide-react";
 import { toast } from "sonner";
 import { products } from "@/lib/data";
 import ModelPreview from "@/components/admin/ModelPreview";
 
-// This would typically come from your API or database
 interface Model3D {
   id: string;
   name: string;
@@ -36,7 +34,6 @@ interface Model3D {
   dateAdded: string;
 }
 
-// Mock data for models
 const mockModels: Model3D[] = [
   {
     id: "model-1",
@@ -73,7 +70,6 @@ const ModelManagement = () => {
   const [linkedProduct, setLinkedProduct] = useState("");
   
   const fetchModels = async (): Promise<Model3D[]> => {
-    // In a real app, this would be an API call
     return mockModels;
   };
   
@@ -108,7 +104,6 @@ const ModelManagement = () => {
       return;
     }
     
-    // In a real app, you would upload to your server or storage service
     toast.success(`Model ${modelName} uploaded successfully!`);
     setIsUploadOpen(false);
     setNewModelFile(null);
@@ -122,12 +117,10 @@ const ModelManagement = () => {
   };
   
   const handleDelete = (modelId: string) => {
-    // In a real app, you would delete from your server or storage
     toast.success("Model deleted successfully");
   };
   
   const handleLinkToProduct = (modelId: string, productId: string) => {
-    // In a real app, you would update the product with the model ID
     toast.success("Model linked to product successfully");
   };
   
@@ -243,7 +236,7 @@ const ModelManagement = () => {
                     <TableRow key={model.id}>
                       <TableCell className="font-medium">
                         <div className="flex items-center">
-                          <Cube className="mr-2 h-4 w-4 text-muted-foreground" />
+                          <Box className="mr-2 h-4 w-4 text-muted-foreground" />
                           {model.name}
                         </div>
                       </TableCell>
@@ -343,7 +336,6 @@ const ModelManagement = () => {
         </CardContent>
       </Card>
 
-      {/* Model preview dialog */}
       <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
         <DialogContent className="sm:max-w-xl">
           <DialogHeader>
