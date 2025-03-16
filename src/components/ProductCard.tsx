@@ -5,7 +5,7 @@ import { Product } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Eye, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: Product;
@@ -15,11 +15,12 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, priority = false }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { addToCart } = useCart();
   
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toast.success(`${product.name} added to cart`);
+    addToCart(product, 1);
   };
 
   return (

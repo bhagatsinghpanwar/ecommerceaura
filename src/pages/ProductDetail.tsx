@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { products } from "@/lib/data";
 import { ArrowLeft, ShoppingCart, Star, Share2, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ARViewer from "@/components/ARViewer";
+import { useCart } from "@/context/CartContext";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,12 +17,14 @@ const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [showARViewer, setShowARViewer] = useState(false);
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   
   const product = products.find(p => p.id === id);
   
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
   
   if (!product) {
     return (
@@ -34,7 +38,12 @@ const ProductDetail = () => {
   }
   
   const handleAddToCart = () => {
-    toast.success(`${product.name} added to cart`);
+    addToCart(product, quantity);
+  };
+  
+  const handleBuyNow = () => {
+    addToCart(product, quantity);
+    navigate('/cart');
   };
   
   const handleQuantityChange = (amount: number) => {
@@ -55,7 +64,7 @@ const ProductDetail = () => {
       <main className="flex-grow py-10 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
-            <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center">
+            <Link to="/products" className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to products
             </Link>
@@ -205,6 +214,12 @@ const ProductDetail = () => {
                   Add to Cart
                 </Button>
                 
+                <Button variant="secondary" className="flex-1" onClick={handleBuyNow} disabled={product.stock === 0}>
+                  Buy Now
+                </Button>
+              </div>
+              
+              <div className="flex gap-4">
                 <Button variant="outline" size="icon">
                   <Heart className="h-4 w-4" />
                 </Button>

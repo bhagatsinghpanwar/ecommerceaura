@@ -1,14 +1,15 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ShoppingCart, User, Menu, X, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
+  const { cartCount } = useCart();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +44,6 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
         <Link 
           to="/" 
           className="text-xl font-medium tracking-tight transition-opacity hover:opacity-80"
@@ -52,7 +52,6 @@ const Navbar = () => {
           ecommerceaura
         </Link>
         
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link 
             to="/products" 
@@ -64,17 +63,16 @@ const Navbar = () => {
             Shop
           </Link>
           <Link 
-            to="/about" 
+            to="/categories" 
             className={cn(
               "text-sm font-medium transition-colors hover:text-primary",
-              location.pathname === '/about' ? "text-primary" : "text-foreground"
+              location.pathname === '/categories' ? "text-primary" : "text-foreground"
             )}
           >
-            About
+            Categories
           </Link>
         </nav>
         
-        {/* Actions */}
         <div className="flex items-center space-x-4">
           <button 
             onClick={toggleSearch}
@@ -90,9 +88,11 @@ const Navbar = () => {
             aria-label="Shopping cart"
           >
             <ShoppingCart size={20} />
-            <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-              0
-            </span>
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
           </Link>
           
           <Link 
@@ -103,7 +103,6 @@ const Navbar = () => {
             <User size={20} />
           </Link>
           
-          {/* Mobile menu toggle */}
           <button 
             onClick={toggleMobileMenu}
             className="md:hidden w-10 h-10 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
@@ -115,7 +114,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Search Overlay */}
       <div 
         className={cn(
           "absolute top-full left-0 w-full bg-white shadow-md transition-all duration-300 ease-in-out overflow-hidden",
@@ -135,7 +133,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Menu */}
       <div 
         className={cn(
           "fixed inset-0 bg-white z-40 transition-transform duration-300 ease-in-out pt-20",
@@ -150,10 +147,10 @@ const Navbar = () => {
             Shop
           </Link>
           <Link 
-            to="/about" 
+            to="/categories" 
             className="text-2xl font-medium hover:text-primary transition-colors"
           >
-            About
+            Categories
           </Link>
           <Link 
             to="/account" 
